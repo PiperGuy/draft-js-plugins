@@ -20,7 +20,6 @@ const resizeablePlugin = createResizeablePlugin();
 const blockDndPlugin = createBlockDndPlugin();
 const alignmentPlugin = createAlignmentPlugin();
 const sideToolbarPlugin = createSideToolbarPlugin();
-const tablePlugin = createTablePlugin();
 
 const { SideToolbar } = sideToolbarPlugin;
 const { UndoButton, RedoButton } = undoPlugin;
@@ -52,7 +51,7 @@ export const Tools = ({ editorState, onChange }) => <div>
   <AddTable editorState={editorState} onChange={onChange} />
 </div>;
 
-export const plugins = [
+export const plugins = ({ onToggleReadOnly }) => [
   dragNDropFileUploadPlugin,
   blockDndPlugin,
   focusPlugin,
@@ -63,5 +62,5 @@ export const plugins = [
   sideToolbarPlugin,
   undoPlugin,
   videoPlugin,
-  tablePlugin
+  createTablePlugin({ onToggleReadOnly })
 ];

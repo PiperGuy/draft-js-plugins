@@ -16,22 +16,28 @@ const videoPlugin = (config = {}) => {
   return {
     blockRendererFn: (block, { getEditorState }) => {
       if (block.getType() === types.ATOMIC) {
-        // TODO subject to change for draft-js next release
-        const contentState = getEditorState().getCurrentContent();
-        const entity = contentState.getEntity(block.getEntityAt(0));
-        const type = entity.getType();
-        const { src } = entity.getData();
-        if (type === types.VIDEOTYPE) {
-          return {
-            component: ThemedVideo,
-            editable: false,
-            props: {
-              src,
-            },
-          };
+        try {
+          // TODO subject to change for draft-js next release
+          const contentState = getEditorState().getCurrentContent();
+          const entity = contentState.getEntity(block.getEntityAt(0));
+          if (!entity) {
+            return null;
+          }
+          const type = entity.getType();
+          const { src } = entity.getData();
+          if (type === types.VIDEOTYPE) {
+            return {
+              component: ThemedVideo,
+              editable: false,
+              props: {
+                src,
+              },
+            };
+          }
+        } catch (e) {
+          return null;
         }
       }
-
       return null;
     },
     addVideo,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   convertFromRaw,
   EditorState,
+  convertToRaw
 } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import initialState from './initialState';
@@ -13,18 +14,28 @@ export default class ExampleEditor extends Component {
 
   state = {
     editorState: EditorState.createWithContent(convertFromRaw(initialState)),
+    readOnly: false
   };
-
   onChange = (editorState) => {
     this.setState({
       editorState,
     });
   };
 
+  onToggleReadOnly = () => {
+    console.log('toggle!', !this.state.readOnly)
+    this.setState({
+      ...this.state,
+      readOnly: !this.state.readOnly
+    });
+  }
+  logState = () => {
+    console.log(convertToRaw(this.state.editorState.getCurrentContent()));
+  }
   focus = () => {
     this.editor.focus();
   };
-
+  plugins = plugins({ onToggleReadOnly: this.onToggleReadOnly });
   render() {
     return (
       <div>
@@ -33,12 +44,15 @@ export default class ExampleEditor extends Component {
             editorState={this.state.editorState}
             onChange={this.onChange}
             readOnly={this.state.readOnly}
-            plugins={plugins}
+            plugins={this.plugins}
             ref={(element) => { this.editor = element; }}
           />
         </div>
 
         <Tools editorState={this.state.editorState} onChange={this.onChange} />
+        <button onClick={this.logState}>
+          Log State
+        </button>
       </div>
     );
   }
