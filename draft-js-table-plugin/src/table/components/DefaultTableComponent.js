@@ -57,6 +57,11 @@ class Cell extends React.Component {
   }
   render() {
     return (<input
+      style={{
+        border: 'none',
+        fontSize: '1rem',
+        padding: '0.5em 1em'
+      }}
       type="text"
       onFocus={this.props.onToggleReadOnly}
       onBlur={this.props.onToggleReadOnly}
@@ -69,8 +74,6 @@ class Cell extends React.Component {
 export default class Table extends React.Component {
   onChange = (column) => (value) => {
     const { blockProps: { cols, editColumn, getEditorState, setEditorState } } = this.props;
-    console.log('Table OnChange', this.props.block)
-    console.log('this.props', this.props)
     setEditorState(
       editColumn({
         editorState: getEditorState(),
@@ -82,21 +85,15 @@ export default class Table extends React.Component {
   }
   render() {
     const { blockProps: { cols }, theme, onToggleReadOnly } = this.props;
-    return (<table className={theme.tableWrapper}>
+    return (<table className={theme.tableWrapper} style={{'empty-cells': 'show', border: '1px solid #cbcbcb'}}>
       <tbody>
-        <tr>
-          {/* {cols.map((col) => (<th key={col.key}>
-            <CellEditor
-              theme={theme}
-              contentState={col.contentState}
-              onChange={this.onChange(col)}
-              onToggleReadOnly={onToggleReadOnly}
-            />
-          </th>))} */}
-          {cols.map((col) => (<th key={col.key}>
-            <Cell value={col.value} onToggleReadOnly={onToggleReadOnly} onChange={this.onChange(col)} />
-          </th>))}
-        </tr>
+        <thead style={{ 'background-color': '#e0e0e0', color: '#000', 'vertical-align': 'bottom', 'text-align': 'left' }}>
+          <tr>
+            {cols.map((col) => (<th key={col.key}>
+              <Cell value={col.value} onToggleReadOnly={onToggleReadOnly} onChange={this.onChange(col)} />
+            </th>))}
+          </tr>
+        </thead>
       </tbody>
     </table>);
   }
