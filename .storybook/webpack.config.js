@@ -8,8 +8,6 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin'); // eslint-disable-line no-var
 
-console.log('yooooo', path.join(__dirname, '..', 'draft-js-focus-plugin', 'src'));
-
 module.exports = {
   plugins: [
   ],
@@ -40,6 +38,7 @@ module.exports = {
           path.join(__dirname, '..', 'draft-js-resizeable-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-buttons', 'src'),
           path.join(__dirname, '..', 'draft-js-video-plugin', 'src'),
+          path.join(__dirname, '..', 'draft-js-table-plugin', 'src'),
         ],
       },
       {
@@ -69,6 +68,7 @@ module.exports = {
           path.join(__dirname, '..', 'draft-js-resizeable-plugin', 'src'),
           path.join(__dirname, '..', 'draft-js-buttons', 'src'),
           path.join(__dirname, '..', 'draft-js-video-plugin', 'src'),
+          path.join(__dirname, '..', 'draft-js-table-plugin', 'src'),
         ],
       }, {
         test: /\.(png|jpg|gif|ico)$/,
@@ -100,6 +100,7 @@ module.exports = {
       'draft-js-resizeable-plugin': path.join(__dirname, '..', 'draft-js-resizeable-plugin', 'src'),
       'draft-js-buttons': path.join(__dirname, '..', 'draft-js-buttons', 'src'),
       'draft-js-video-plugin': path.join(__dirname, '..', 'draft-js-video-plugin', 'src'),
+      'draft-js-table-plugin': path.join(__dirname, '..', 'draft-js-table-plugin', 'src'),
       react: path.join(__dirname, '..', 'node_modules', 'react'),
     },
   }

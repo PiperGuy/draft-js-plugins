@@ -67,7 +67,9 @@
       "draft-js-undo-plugin",
       "draft-js-undo-plugin/lib/plugin.css",
       "draft-js-video-plugin",
-      "draft-js-video-plugin/lib/plugin.css"
+      "draft-js-video-plugin/lib/plugin.css",
+      "draft-js-table-plugin",
+      "draft-js-table-plugin/lib/plugin.css"
     ]
   }
 }

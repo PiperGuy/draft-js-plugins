@@ -1,0 +1,3 @@
+.tableWrapper :global(.public-DraftEditor-content) {
+  min-height: 0px;
+}
