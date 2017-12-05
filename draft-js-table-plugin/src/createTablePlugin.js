@@ -2,7 +2,7 @@ import decorateComponentWithProps from 'decorate-component-with-props';
 import DefaultTableComponent from './table/components/DefaultTableComponent';
 import * as types from './table/constants';
 import tableStyles from './tableStyles.css';
-import { editColumn } from './table/modifiers/column';
+import { editColumn, editCell } from './table/modifiers/editTable';
 
 const defaultTheme = tableStyles;
 export default ({ tableComponent, onToggleReadOnly, theme, decorator } = {}) => {
@@ -23,21 +23,22 @@ export default ({ tableComponent, onToggleReadOnly, theme, decorator } = {}) => 
           // TODO subject to change for draft-js next release
           const contentState = getEditorState().getCurrentContent();
           const entity = contentState.getEntity(block.getEntityAt(0));
-          console.log('block', block);
           if (!entity) {
             return null;
           }
           const type = entity.getType();
-          const { cols } = entity.getData();
+          const { columns, rows } = entity.getData();
           if (type === types.TABLETYPE) {
             return {
               component: ThemedTable,
               editable: true,
               props: {
-                cols,
+                columns,
+                rows,
                 getEditorState,
                 setEditorState,
-                editColumn
+                editColumn,
+                editCell
               },
             };
           }

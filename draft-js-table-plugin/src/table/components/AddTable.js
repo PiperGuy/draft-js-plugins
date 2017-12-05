@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 export default class TableAdd extends Component {
   // Start the popover closed
   state = {
-    cols: 3,
+    columns: 3,
+    rows: 2,
     open: false,
   };
 
@@ -43,11 +44,14 @@ export default class TableAdd extends Component {
 
   addTable = () => {
     const { editorState, onChange } = this.props;
-    onChange(this.props.modifier(editorState, { cols: this.state.cols }));
+    onChange(this.props.modifier(editorState, { columns: this.state.columns, rows: this.state.rows }));
   };
 
   changeCols = (evt) => {
-    this.setState({ cols: evt.target.value });
+    this.setState({ ...this.state, columns: evt.target.value });
+  };
+  changeRows = (evt) => {
+    this.setState({ ...this.state, rows: evt.target.value });
   };
 
   render() {
@@ -69,7 +73,13 @@ export default class TableAdd extends Component {
             type="text"
             placeholder="Cols"
             onChange={this.changeCols}
-            value={this.state.cols}
+            value={this.state.columns}
+          />
+          <input
+            type="text"
+            placeholder="Rows"
+            onChange={this.changeRows}
+            value={this.state.rows}
           />
           <button
             type="button"
