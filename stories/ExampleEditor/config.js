@@ -51,7 +51,7 @@ export const Tools = ({ editorState, onChange }) => <div>
   <AddTable editorState={editorState} onChange={onChange} />
 </div>;
 
-export const plugins = ({ onToggleReadOnly }) => [
+export const plugins = ({ setReadOnly }) => [
   dragNDropFileUploadPlugin,
   blockDndPlugin,
   focusPlugin,
@@ -62,5 +62,5 @@ export const plugins = ({ onToggleReadOnly }) => [
   sideToolbarPlugin,
   undoPlugin,
   videoPlugin,
-  createTablePlugin({ onToggleReadOnly })
+  createTablePlugin({ setReadOnly })
 ];

@@ -2,10 +2,10 @@ import decorateComponentWithProps from 'decorate-component-with-props';
 import DefaultTableComponent from './table/components/DefaultTableComponent';
 import * as types from './table/constants';
 import tableStyles from './tableStyles.css';
-import { editColumn } from './table/modifiers/column';
+import { editColumn, addColumn } from './table/modifiers/column';
 
 const defaultTheme = tableStyles;
-export default ({ tableComponent, onToggleReadOnly, theme, decorator } = {}) => {
+export default ({ tableComponent, setReadOnly, theme, decorator } = {}) => {
   const tableTheme = theme || defaultTheme;
   let Table = tableComponent || DefaultTableComponent;
   if (decorator) {
@@ -13,7 +13,7 @@ export default ({ tableComponent, onToggleReadOnly, theme, decorator } = {}) => 
   }
   const ThemedTable = decorateComponentWithProps(Table, {
     theme: tableTheme,
-    onToggleReadOnly,
+    setReadOnly,
   });
 
   return {
@@ -37,7 +37,8 @@ export default ({ tableComponent, onToggleReadOnly, theme, decorator } = {}) => 
                 cols,
                 getEditorState,
                 setEditorState,
-                editColumn
+                editColumn,
+                addColumn
               },
             };
           }

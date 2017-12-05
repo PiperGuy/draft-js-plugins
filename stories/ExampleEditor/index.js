@@ -22,11 +22,11 @@ export default class ExampleEditor extends Component {
     });
   };
 
-  onToggleReadOnly = () => {
-    console.log('toggle!', !this.state.readOnly)
+  setReadOnly = (readOnly) => {
+    console.log('setReadOnly', readOnly)
     this.setState({
       ...this.state,
-      readOnly: !this.state.readOnly
+      readOnly
     });
   }
   logState = () => {
@@ -35,7 +35,7 @@ export default class ExampleEditor extends Component {
   focus = () => {
     this.editor.focus();
   };
-  plugins = plugins({ onToggleReadOnly: this.onToggleReadOnly });
+  plugins = plugins({ setReadOnly: this.setReadOnly });
   render() {
     return (
       <div>
