@@ -40,16 +40,18 @@ const dragNDropFileUploadPlugin = createDragNDropUploadPlugin({
   addImage: imagePlugin.addImage,
 });
 
-export const Tools = ({ editorState, onChange }) => <div>
-  <AlignmentTool />
-  <EmojiSuggestions />
-  <EmojiSelect />
-  <SideToolbar />
-  <UndoButton />
-  <RedoButton />
-  <VideoAdd editorState={editorState} onChange={onChange} />
-  <AddTable editorState={editorState} onChange={onChange} />
-</div>;
+export const Tools = ({ editorState, onChange }) => (
+  <div>
+    <AlignmentTool />
+    <EmojiSuggestions />
+    <EmojiSelect />
+    <SideToolbar />
+    <UndoButton />
+    <RedoButton />
+    <VideoAdd editorState={editorState} onChange={onChange} />
+    <AddTable editorState={editorState} onChange={onChange} />
+  </div>
+);
 
 export const plugins = ({ onToggleReadOnly }) => [
   dragNDropFileUploadPlugin,
@@ -62,5 +64,5 @@ export const plugins = ({ onToggleReadOnly }) => [
   sideToolbarPlugin,
   undoPlugin,
   videoPlugin,
-  createTablePlugin({ onToggleReadOnly })
+  createTablePlugin({ onToggleReadOnly }),
 ];

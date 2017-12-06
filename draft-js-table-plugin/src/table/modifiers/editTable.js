@@ -1,12 +1,7 @@
 import { EditorState } from 'draft-js';
 
-export const editColumn = ({
-  editorState,
-  columns,
-  column,
-  block
-}) => {
-  const updated = columns.map((col) => {
+export const editColumn = ({ editorState, columns, column, block }) => {
+  const updated = columns.map(col => {
     if (col.key === column.key) {
       return { ...col, value: column.value };
     }
@@ -20,13 +15,10 @@ export const editColumn = ({
   if (!entityKey) {
     return editorState;
   }
-  const updatedContentState = contentState.replaceEntityData(
-    entityKey,
-    {
-      columns: updated,
-      rows
-    }
-  );
+  const updatedContentState = contentState.replaceEntityData(entityKey, {
+    columns: updated,
+    rows,
+  });
   const updatedEditorState = EditorState.push(
     editorState,
     updatedContentState,
@@ -39,45 +31,72 @@ export const editColumn = ({
   );
 };
 
-export const editCell = ({
-  editorState,
-  cell,
-  row,
-  block
-}) => {
-  console.log('Editing Cell', cell, row);
-  const updatedRow = row.value.map((c) => {
-    console.log('c.key === cell.key', c.key === cell.key, c.key, cell.key, cell.value);
+export const editCell = ({ editorState, cell, row, block }) => {
+  const updatedRow = row.value.map(c => {
     return {
       ...c,
-      value: c.key === cell.key ? cell.value : c.value
-    }
+      value: c.key === cell.key ? cell.value : c.value,
+    };
   });
-  console.log('updatedRow', updatedRow);
 
   const contentState = editorState.getCurrentContent();
   const entityKey = block.getEntityAt(0);
   const entity = contentState.getEntity(entityKey);
-  console.log('entity key editing cell', entityKey);
   if (!entity) {
     return editorState;
   }
   const { columns, rows } = entity.getData();
 
-  const updatedRows = rows.map((r) => {
+  const updatedRows = rows.map(r => {
     if (r.key === row.key) {
       return { key: row.key, value: updatedRow };
     }
     return r;
   });
-  console.log('updated rows', updatedRows);
-  const updatedContentState = contentState.replaceEntityData(
-    entityKey,
-    {
-      columns,
-      rows: updatedRows
-    }
+  const updatedContentState = contentState.replaceEntityData(entityKey, {
+    columns,
+    rows: updatedRows,
+  });
+  const updatedEditorState = EditorState.push(
+    editorState,
+    updatedContentState,
+    'insert-fragment'
   );
+
+  return EditorState.forceSelection(
+    updatedEditorState,
+    updatedEditorState.getSelection()
+  );
+};
+
+export const addColumn = ({ columns, rows, index, block, editorState }) => {
+  const contentState = editorState.getCurrentContent();
+  const entityKey = block.getEntityAt(0);
+  if (!entityKey) {
+    return editorState;
+  }
+  const newColumn = {
+    key: `Column${index}Inserted${columns.length}`,
+    value: '',
+  };
+  const updatedColumns = [
+    ...columns.slice(0, index),
+    newColumn,
+    ...columns.slice(index),
+  ];
+  const updatedRows = rows.map(row => {
+    const newRow = { key: `Row${index}Inserted${row.value.length}`, value: '' };
+    return {
+      key: row.key,
+      value: [...row.value.slice(0, index), newRow, ...row.value.slice(index)],
+    };
+  });
+  console.log('Updated Rows', updatedRows);
+  console.log('Updated Columns', updatedColumns);
+  const updatedContentState = contentState.replaceEntityData(entityKey, {
+    columns: updatedColumns,
+    rows: updatedRows,
+  });
   const updatedEditorState = EditorState.push(
     editorState,
     updatedContentState,

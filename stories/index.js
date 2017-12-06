@@ -78,8 +78,9 @@ import UnicornEditor from './Home/UnicornEditor';
 // Example Editor
 import ExampleEditor from './ExampleEditor';
 
-storiesOf('Example Editor', module)
-  .add('Editor with all the things!', () => <ExampleEditor />);
+storiesOf('Example Editor', module).add('Editor with all the things!', () => (
+  <ExampleEditor />
+));
 //
 //
 // storiesOf('Unicorn Editor', module)

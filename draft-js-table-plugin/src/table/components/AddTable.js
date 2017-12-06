@@ -44,29 +44,31 @@ export default class TableAdd extends Component {
 
   addTable = () => {
     const { editorState, onChange } = this.props;
-    onChange(this.props.modifier(editorState, { columns: this.state.columns, rows: this.state.rows }));
+    onChange(
+      this.props.modifier(editorState, {
+        columns: this.state.columns,
+        rows: this.state.rows,
+      })
+    );
   };
 
-  changeCols = (evt) => {
+  changeCols = evt => {
     this.setState({ ...this.state, columns: evt.target.value });
   };
-  changeRows = (evt) => {
+  changeRows = evt => {
     this.setState({ ...this.state, rows: evt.target.value });
   };
 
   render() {
     return (
       <div>
-        <button
-          onMouseUp={this.openPopover}
-          type="button"
-        >
+        <button onMouseUp={this.openPopover} type="button">
           +
         </button>
         <div
           onClick={this.onPopoverClick}
           style={{
-            display: this.state.open ? 'block' : 'none'
+            display: this.state.open ? 'block' : 'none',
           }}
         >
           <input
@@ -81,10 +83,7 @@ export default class TableAdd extends Component {
             onChange={this.changeRows}
             value={this.state.rows}
           />
-          <button
-            type="button"
-            onClick={this.addTable}
-          >
+          <button type="button" onClick={this.addTable}>
             Add
           </button>
         </div>

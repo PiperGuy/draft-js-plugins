@@ -202,6 +202,12 @@ module.exports = {
         'draft-js-table-plugin',
         'src'
       ),
+      'draft-js-video-plugin': path.join(
+        __dirname,
+        '..',
+        'draft-js-video-plugin',
+        'src'
+      ),
       react: path.join(__dirname, '..', 'node_modules', 'react'),
     },
   },
