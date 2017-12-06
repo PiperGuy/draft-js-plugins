@@ -1,11 +1,83 @@
-.tableWrapper :global(.public-DraftEditor-content) {
+.table :global(.public-DraftEditor-content) {
   min-height: 0px;
 }
-
-.tableWrapper {
-  display: block;
+.table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
   width: 100%;
-  margin: 10px;
+  table-layout: fixed;
+}
+.caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+.tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+.th,
+.td {
+  padding: .625em;
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  .table {
+    border: 0;
+  }
+  .caption {
+    font-size: 1.3em;
+  }
+  .th,
+  .td {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  .tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  .td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  .td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .td:last-child {
+    border-bottom: 0;
+  }
+
+  .thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+}
+.th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
 }
 
 .cellWrapper {

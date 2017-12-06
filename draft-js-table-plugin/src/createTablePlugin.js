@@ -31,7 +31,7 @@ export default ({ tableComponent, onToggleReadOnly, theme, decorator } = {}) => 
           if (type === types.TABLETYPE) {
             return {
               component: ThemedTable,
-              editable: true,
+              editable: false,
               props: {
                 columns,
                 rows,

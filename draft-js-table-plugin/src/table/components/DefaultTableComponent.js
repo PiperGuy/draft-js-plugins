@@ -162,15 +162,13 @@ export default class Table extends React.Component {
   }
   render() {
     const { blockProps: { columns, rows }, theme, onToggleReadOnly } = this.props;
-    console.log('rows', rows)
     return (
       <table
-        className={theme.tableWrapper}
-        style={{ emptyCells: 'show', border: '1px solid #cbcbcb' }}
+        className={theme.table}
       >
-        <thead style={{ backgroundColor: '#e0e0e0', color: '#000', verticalAlign: 'bottom', textAlign: 'left' }}>
-          <tr>
-            {columns.map((col) => (<th key={col.key}>
+        <thead className={theme.thead}>
+          <tr className={theme.tr}>
+            {columns.map((col) => (<th key={col.key} className={theme.th}>
               <ColumnHeading
                 value={col.value}
                 theme={theme}
@@ -180,11 +178,11 @@ export default class Table extends React.Component {
             </th>))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className={theme.tbody}>
           {rows.map((row) => (
-            <tr key={row.key}>
-              {row.value.map((cell) =>
-                <td key={cell.key}>
+            <tr key={row.key} className={theme.tr}>
+              {row.value.map((cell, i) =>
+                <td key={cell.key} data-label={columns[i].value} className={theme.td}>
                   <RowCell
                     value={cell.value}
                     theme={theme}

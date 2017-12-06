@@ -27,10 +27,15 @@ export const editColumn = ({
       rows
     }
   );
-  return EditorState.push(
+  const updatedEditorState = EditorState.push(
     editorState,
     updatedContentState,
     'insert-fragment'
+  );
+
+  return EditorState.forceSelection(
+    updatedEditorState,
+    updatedEditorState.getSelection()
   );
 };
 
@@ -73,9 +78,14 @@ export const editCell = ({
       rows: updatedRows
     }
   );
-  return EditorState.push(
+  const updatedEditorState = EditorState.push(
     editorState,
     updatedContentState,
     'insert-fragment'
+  );
+
+  return EditorState.forceSelection(
+    updatedEditorState,
+    updatedEditorState.getSelection()
   );
 };
