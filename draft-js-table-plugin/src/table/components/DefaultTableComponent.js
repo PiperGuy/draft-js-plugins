@@ -182,7 +182,7 @@ export default class Table extends React.Component {
           {rows.map((row) => (
             <tr key={row.key} className={theme.tr}>
               {row.value.map((cell, i) =>
-                <td key={cell.key} data-label={columns[i].value} className={theme.td}>
+                <td key={cell.key} data-value={cell.value} data-label={columns[i].value} className={theme.td}>
                   <RowCell
                     value={cell.value}
                     theme={theme}
