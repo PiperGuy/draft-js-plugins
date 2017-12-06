@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ContentState, EditorState, Editor } from 'draft-js';
+import TextareaAutosize from 'react-textarea-autosize';
 
 class CellEditor extends React.Component {
   constructor(props) {
@@ -51,6 +52,7 @@ const ColumnHeading = ({ value, onChange, onToggleReadOnly, theme }) =>
     theme={theme}
     onChange={onChange}
     value={value}
+    textAreaStyle={theme.columnTextArea}
     onToggleReadOnly={onToggleReadOnly}
     render={({ showEditOptions }) => (<span>
       {showEditOptions && <AddColumn theme={theme} position={'left'} />}
@@ -63,6 +65,7 @@ const RowCell = ({ value, onChange, onToggleReadOnly, theme, onRowEditOptions })
     theme={theme}
     onChange={onChange}
     value={value}
+    textAreaStyle={theme.rowTextArea}
     onToggleReadOnly={onToggleReadOnly}
     render={({ showEditOptions }) => {
       if (showEditOptions) {
@@ -105,12 +108,18 @@ class InputCell extends React.Component {
   }
   render() {
     return (<span className={this.props.theme.cellWrapper}>
-      <input
-        style={{
-          border: 'none',
-          fontSize: '1rem',
-          padding: '0.5em 1em'
-        }}
+      {/* <input
+        style={this.props.style}
+        type="text"
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        value={this.state.value}
+        onChange={this.onChange}
+      /> */}
+      <TextareaAutosize
+        useCacheForDOMMeasurements
+        className={this.props.textAreaStyle}
+        style={{ resize: 'none' }}
         type="text"
         onFocus={this.onFocus}
         onBlur={this.onBlur}
@@ -138,7 +147,6 @@ export default class Table extends React.Component {
     );
   }
   onChangeCell = ({ row, cell }) => (value) => {
-    console.log('Change Cell, ', row, cell, value)
     const { blockProps: { editCell, getEditorState, setEditorState } } = this.props;
     setEditorState(
       editCell({

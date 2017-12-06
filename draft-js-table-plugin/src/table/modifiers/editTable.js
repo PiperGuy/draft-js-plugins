@@ -14,13 +14,17 @@ export const editColumn = ({
   });
   const contentState = editorState.getCurrentContent();
   const entityKey = block.getEntityAt(0);
+  const entity = contentState.getEntity(entityKey);
+  const { rows } = entity.getData();
+
   if (!entityKey) {
     return editorState;
   }
   const updatedContentState = contentState.replaceEntityData(
     entityKey,
     {
-      columns: updated
+      columns: updated,
+      rows
     }
   );
   return EditorState.push(

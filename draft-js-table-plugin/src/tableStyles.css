@@ -27,3 +27,18 @@
   flex-direction: column;
   z-index: 10;
 }
+
+.columnTextArea {
+  border: none;
+  font-size: 1rem;
+  padding: 0;
+  font-weight: bold;
+  background-color: inherit;
+}
+
+.rowTextArea {
+  border: none;
+  font-size: 1rem;
+  padding: 0;
+  background-color: inherit;
+}
