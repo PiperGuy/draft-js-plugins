@@ -87,7 +87,6 @@ class InputCell extends React.Component {
       ...this.state,
       value: e.target.value
     });
-    this.props.onChange(e.target.value);
   }
   onFocus = () => {
     this.props.onToggleReadOnly();
@@ -105,6 +104,7 @@ class InputCell extends React.Component {
         showEditOptions: false
       });
     }, 1000);
+    this.props.onChange(this.state.value);
   }
   render() {
     return (<span className={this.props.theme.cellWrapper}>
