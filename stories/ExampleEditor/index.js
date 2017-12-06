@@ -18,14 +18,15 @@ export default class ExampleEditor extends Component {
   };
 
   onToggleReadOnly = readOnly => {
-    console.log('toggle!', readOnly);
     this.setState({
       ...this.state,
       readOnly,
     });
   };
   logState = () => {
-    console.log(convertToRaw(this.state.editorState.getCurrentContent()));
+    console.log(
+      JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()))
+    );
   };
   focus = () => {
     this.editor.focus();

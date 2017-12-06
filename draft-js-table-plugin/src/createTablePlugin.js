@@ -1,8 +1,15 @@
 import decorateComponentWithProps from 'decorate-component-with-props';
-import DefaultTableComponent from './table/components/DefaultTableComponent';
+import DefaultTableComponent from './table/components/Table';
 import * as types from './table/constants';
 import tableStyles from './tableStyles.css';
-import { editColumn, editCell, addColumn } from './table/modifiers/editTable';
+import {
+  editColumn,
+  editCell,
+  removeRow,
+  addRow,
+  addColumn,
+  removeColumn,
+} from './table/modifiers/editTable';
 
 const defaultTheme = tableStyles;
 export default (
@@ -42,6 +49,9 @@ export default (
                 editColumn,
                 editCell,
                 addColumn,
+                removeColumn,
+                removeRow,
+                addRow,
               },
             };
           }

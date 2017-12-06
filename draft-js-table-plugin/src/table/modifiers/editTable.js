@@ -91,10 +91,101 @@ export const addColumn = ({ columns, rows, index, block, editorState }) => {
       value: [...row.value.slice(0, index), newRow, ...row.value.slice(index)],
     };
   });
-  console.log('Updated Rows', updatedRows);
-  console.log('Updated Columns', updatedColumns);
   const updatedContentState = contentState.replaceEntityData(entityKey, {
     columns: updatedColumns,
+    rows: updatedRows,
+  });
+  const updatedEditorState = EditorState.push(
+    editorState,
+    updatedContentState,
+    'insert-fragment'
+  );
+
+  return EditorState.forceSelection(
+    updatedEditorState,
+    updatedEditorState.getSelection()
+  );
+};
+
+export const removeColumn = ({ columns, rows, index, block, editorState }) => {
+  const contentState = editorState.getCurrentContent();
+  const entityKey = block.getEntityAt(0);
+  if (!entityKey) {
+    return editorState;
+  }
+  const updatedColumns =
+    index > 0
+      ? [...columns.slice(0, index - 1), ...columns.slice(index)]
+      : columns.slice(1);
+  const updatedRows = rows.map(row => {
+    return {
+      key: row.key,
+      value:
+        index > 0
+          ? [...row.value.slice(0, index - 1), ...row.value.slice(index)]
+          : row.value.slice(1),
+    };
+  });
+  console.log('updatedColumns', updatedColumns);
+  console.log('updateRows', updatedRows);
+  const updatedContentState = contentState.replaceEntityData(entityKey, {
+    columns: updatedColumns,
+    rows: updatedRows,
+  });
+  const updatedEditorState = EditorState.push(
+    editorState,
+    updatedContentState,
+    'insert-fragment'
+  );
+
+  return EditorState.forceSelection(
+    updatedEditorState,
+    updatedEditorState.getSelection()
+  );
+};
+
+export const addRow = ({ columns, rows, index, block, editorState }) => {
+  const contentState = editorState.getCurrentContent();
+  const entityKey = block.getEntityAt(0);
+  if (!entityKey) {
+    return editorState;
+  }
+
+  const newRow = {
+    key: `InsertedRow${index}${rows.length}`,
+    value: Array.from({ length: columns.length }).map((cell, i) => ({
+      key: `InsertedRow${i}`,
+      value: '',
+    })),
+  };
+  console.log('rowIndex', index);
+  const updatedRows = [...rows.slice(0, index), newRow, ...rows.slice(index)];
+  const updatedContentState = contentState.replaceEntityData(entityKey, {
+    columns,
+    rows: updatedRows,
+  });
+  const updatedEditorState = EditorState.push(
+    editorState,
+    updatedContentState,
+    'insert-fragment'
+  );
+
+  return EditorState.forceSelection(
+    updatedEditorState,
+    updatedEditorState.getSelection()
+  );
+};
+
+export const removeRow = ({ columns, rows, index, block, editorState }) => {
+  const contentState = editorState.getCurrentContent();
+  const entityKey = block.getEntityAt(0);
+  if (!entityKey) {
+    return editorState;
+  }
+
+  const updatedRows = rows.filter((row, i) => i !== index);
+  const updatedContentState = contentState.replaceEntityData(entityKey, {
+    columns,
     rows: updatedRows,
   });
   const updatedEditorState = EditorState.push(
