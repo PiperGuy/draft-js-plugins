@@ -1,5 +1,5 @@
 import React from 'react';
-import TextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from './TextArea';
 
 export default class InputCell extends React.Component {
   static defaultProps = {
