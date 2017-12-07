@@ -126,8 +126,6 @@ export const removeColumn = ({ columns, rows, index, block, editorState }) => {
           : row.value.slice(1),
     };
   });
-  console.log('updatedColumns', updatedColumns);
-  console.log('updateRows', updatedRows);
   const updatedContentState = contentState.replaceEntityData(entityKey, {
     columns: updatedColumns,
     rows: updatedRows,
@@ -158,7 +156,6 @@ export const addRow = ({ columns, rows, index, block, editorState }) => {
       value: '',
     })),
   };
-  console.log('rowIndex', index);
   const updatedRows = [...rows.slice(0, index), newRow, ...rows.slice(index)];
   const updatedContentState = contentState.replaceEntityData(entityKey, {
     columns,
