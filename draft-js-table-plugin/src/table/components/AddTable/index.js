@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import styles from './styles.css';
+import TableIcon from './TableIcon';
 
 export default class TableAdd extends Component {
   // Start the popover closed
@@ -60,30 +62,43 @@ export default class TableAdd extends Component {
   };
 
   render() {
+    const popoverClassName = this.state.open
+      ? styles.addVideoPopover
+      : styles.addVideoClosedPopover;
+    const buttonClassName = this.state.open
+      ? styles.addVideoPressedButton
+      : styles.addVideoButton;
+
     return (
-      <div>
-        <button onMouseUp={this.openPopover} type="button">
-          +
-        </button>
-        <div
-          onClick={this.onPopoverClick}
-          style={{
-            display: this.state.open ? 'block' : 'none',
-          }}
+      <div className={styles.addVideo}>
+        <button
+          className={buttonClassName}
+          onMouseUp={this.openPopover}
+          type="button"
         >
+          <TableIcon />
+        </button>
+        <div className={popoverClassName} onClick={this.onPopoverClick}>
+          <p>Add a Table</p>
           <input
             type="text"
-            placeholder="Cols"
+            placeholder="Columns"
+            className={styles.addVideoInput}
             onChange={this.changeCols}
             value={this.state.columns}
           />
           <input
             type="text"
             placeholder="Rows"
+            className={styles.addVideoInput}
             onChange={this.changeRows}
             value={this.state.rows}
           />
-          <button type="button" onClick={this.addTable}>
+          <button
+            className={styles.addVideoConfirmButton}
+            type="button"
+            onClick={this.addTable}
+          >
             Add
           </button>
         </div>

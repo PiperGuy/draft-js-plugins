@@ -73,7 +73,7 @@ const videoComponent = ({ videoPlugin }) =>
           <div className={popoverClassName} onClick={this.onPopoverClick}>
             <input
               type="text"
-              placeholder="Paste the video url …"
+              placeholder="Paste video url …"
               className={styles.addVideoInput}
               onChange={this.changeUrl}
               value={this.state.url}

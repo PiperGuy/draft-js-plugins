@@ -85,21 +85,31 @@
 .cellWrapper {
   position: relative;
 }
-
-.addColumnButton {
-  min-width: 16px;
+.rowButtons {
+  display: flex;
   position: absolute;
-  cursor: pointer;
-  top: -33px;
-  z-index: 10;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 14px;
+  left: -29px;
+  height: 49px;
+  top: -15px;
 }
-.removeColumnButton {
-  top: -33px;
-  width: 16px;
+.rowButtons span {
+  width: 14px;
+  height: 14px;
+}
+.columnButtons {
+  width: 49px;
+  top: -31px;
+  left: 10px;
+  display: flex;
   position: absolute;
-  cursor: pointer;
-  left: 50%;
-  z-index: 10;
+  justify-content: space-between;
+}
+
+.columnButtons span {
+  width: 14px;
 }
 
 .columnTextArea {
@@ -117,15 +127,4 @@
   padding: 0;
   width: 100%;
   background-color: inherit;
-}
-
-.rowEdit {
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 14px;
-  left: -29px;
-  height: 49px;
-  top: -15px;
 }

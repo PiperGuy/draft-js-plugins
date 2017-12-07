@@ -11,7 +11,9 @@ import createSideToolbarPlugin from 'draft-js-side-toolbar-plugin';
 import createUndoPlugin from 'draft-js-undo-plugin';
 import mockUpload from '../Image/CustomImageEditor/mockUpload';
 import createVideoPlugin from './Video';
+import SideToolbarStructure from './SideToolbarStructure';
 import { EmojiSuggestions, EmojiSelect, emojiPlugin } from './Emoji';
+import styles from './editorStyles.css';
 
 const videoPlugin = createVideoPlugin();
 const undoPlugin = createUndoPlugin();
@@ -19,7 +21,9 @@ const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
 const blockDndPlugin = createBlockDndPlugin();
 const alignmentPlugin = createAlignmentPlugin();
-const sideToolbarPlugin = createSideToolbarPlugin();
+const sideToolbarPlugin = createSideToolbarPlugin({
+  structure: [SideToolbarStructure],
+});
 
 const { SideToolbar } = sideToolbarPlugin;
 const { UndoButton, RedoButton } = undoPlugin;
@@ -41,7 +45,7 @@ const dragNDropFileUploadPlugin = createDragNDropUploadPlugin({
 });
 
 export const Tools = ({ editorState, onChange }) => (
-  <div>
+  <div className={styles.tools}>
     <AlignmentTool />
     <EmojiSuggestions />
     <EmojiSelect />

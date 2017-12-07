@@ -35,6 +35,8 @@ export default class ExampleEditor extends Component {
   render() {
     return (
       <div>
+        <Tools editorState={this.state.editorState} onChange={this.onChange} />
+
         <div className={editorStyles.editor} onClick={this.focus}>
           <Editor
             editorState={this.state.editorState}
@@ -46,8 +48,6 @@ export default class ExampleEditor extends Component {
             }}
           />
         </div>
-
-        <Tools editorState={this.state.editorState} onChange={this.onChange} />
         <button onClick={this.logState}>Log State</button>
       </div>
     );

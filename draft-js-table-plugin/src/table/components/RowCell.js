@@ -1,6 +1,6 @@
 import React from 'react';
 import InputCell from './InputCell';
-import RowEditButtons from './RowEditButtons';
+import EditButtons from './EditButtons';
 
 export default class RowCell extends React.Component {
   render() {
@@ -20,11 +20,11 @@ export default class RowCell extends React.Component {
           render={({ showEditOptions }) =>
             this.props.hasEditOptions &&
             showEditOptions && (
-              <RowEditButtons
-                theme={theme}
-                onRowAddBefore={this.props.onRowAddBefore}
-                onRowDelete={this.props.onRowDelete}
-                onRowAddAfter={this.props.onRowAddAfter}
+              <EditButtons
+                className={theme.rowButtons}
+                onAddBefore={this.props.onRowAddBefore}
+                onDelete={this.props.onRowDelete}
+                onAddAfter={this.props.onRowAddAfter}
               />
             )
           }
