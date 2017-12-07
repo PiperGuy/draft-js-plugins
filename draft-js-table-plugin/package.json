@@ -1,5 +1,5 @@
 {
-  "name": "draft-js-table-plugin",
+  "name": "@export-mike/draft-js-table-plugin",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
