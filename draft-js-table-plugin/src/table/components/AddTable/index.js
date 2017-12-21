@@ -71,13 +71,17 @@ export default class TableAdd extends Component {
 
     return (
       <div className={styles.addVideo}>
-        <button
-          className={buttonClassName}
-          onMouseUp={this.openPopover}
-          type="button"
-        >
-          <TableIcon />
-        </button>
+        {!this.props.render && (
+          <button
+            className={buttonClassName}
+            onMouseUp={this.openPopover}
+            type="button"
+          >
+            {this.props.children && this.props.children}
+            {!this.props.children && <TableIcon />}
+          </button>
+        )}
+        {this.props.render && this.props.render({ onClick: this.openPopover })}
         <div className={popoverClassName} onClick={this.onPopoverClick}>
           <p>Add a Table</p>
           <input

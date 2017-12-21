@@ -27,9 +27,9 @@
     border-radius: 1.5em;
     cursor: pointer;
     height: 1.5em;
-    width: 2.5em;
     font-size: 1.5em;
-    line-height: 1.2em;
+    min-width: 2.5em;
+    line-height: 2.2em;
     margin: 0;
 }
 
