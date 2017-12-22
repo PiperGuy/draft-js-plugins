@@ -40,7 +40,7 @@ export default (
           if (type === types.TABLETYPE) {
             return {
               component: ThemedTable,
-              editable: false,
+              editable: true,
               props: {
                 columns,
                 rows,
