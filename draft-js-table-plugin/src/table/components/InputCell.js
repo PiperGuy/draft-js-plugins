@@ -1,6 +1,6 @@
 import React from 'react';
 import TextareaAutosize from './TextArea';
-
+const isIE = !!window.MSInputMethodContext && !!document.documentMode;
 export default class InputCell extends React.Component {
   static defaultProps = {
     render: () => {},
@@ -40,6 +40,22 @@ export default class InputCell extends React.Component {
     this.props.onChange(this.state.value);
   };
   render() {
+    if (isIE) {
+      return (
+        <span className={this.props.theme.cellWrapper}>
+          <texarea
+            className={this.props.textAreaStyle}
+            style={{ resize: 'none' }}
+            type="text"
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            value={this.state.value}
+            onChange={this.onChange}
+          />
+          {this.props.render(this.state)}
+        </span>
+      );
+    }
     return (
       <span className={this.props.theme.cellWrapper}>
         <TextareaAutosize
