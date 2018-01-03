@@ -1,6 +1,6 @@
 {
   "name": "@mikeljames/draft-js-table-plugin",
-  "version": "1.0.0-test-beta-3.5.1",
+  "version": "1.0.0-test-beta-3.5.2",
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
