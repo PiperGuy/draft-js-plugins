@@ -1,5 +1,5 @@
 {
-  "name": "draft-js-video-plugin",
+  "name": "@mikeljames/draft-js-video-plugin",
   "version": "2.0.1",
   "description": "Video Plugin for DraftJS",
   "author": {
