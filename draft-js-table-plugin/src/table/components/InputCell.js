@@ -61,7 +61,7 @@ export default class InputCell extends React.Component {
         <TextareaAutosize
           useCacheForDOMMeasurements
           className={this.props.textAreaStyle}
-          style={{ resize: 'none' }}
+          style={{ resize: 'none', width: '100%' }}
           type="text"
           onFocus={this.onFocus}
           onBlur={this.onBlur}
