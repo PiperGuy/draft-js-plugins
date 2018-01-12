@@ -115,14 +115,14 @@ export const removeColumn = ({ columns, rows, index, block, editorState }) => {
   }
   const updatedColumns =
     index > 0
-      ? [...columns.slice(0, index - 1), ...columns.slice(index)]
+      ? [...columns.slice(0, index), ...columns.slice(index + 1)]
       : columns.slice(1);
   const updatedRows = rows.map(row => {
     return {
       key: row.key,
       value:
         index > 0
-          ? [...row.value.slice(0, index - 1), ...row.value.slice(index)]
+          ? [...row.value.slice(0, index), ...row.value.slice(index + 1)]
           : row.value.slice(1),
     };
   });
